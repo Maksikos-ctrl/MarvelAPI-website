@@ -1,5 +1,5 @@
 ![Banner](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnsTlbxr2g_8JvtXX2eOCNON1thUytxyZ0CQ&usqp=CAU)
-)
+
 # Marvel API
 
 ### Description 
