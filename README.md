@@ -1,4 +1,4 @@
-![Banner](![изображение](https://user-images.githubusercontent.com/69985852/185908568-b1e5763c-e1db-4acd-bf67-fb8afbe30674.png)
+![Banner](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnsTlbxr2g_8JvtXX2eOCNON1thUytxyZ0CQ&usqp=CAU)
 )
 # Marvel API
 
