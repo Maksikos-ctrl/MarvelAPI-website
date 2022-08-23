@@ -2,6 +2,8 @@
 import { Component } from 'react'; 
 import './randomChar.scss';
 
+
+import ErrorMsg from '../errorMessage/ErrorMsg';
 import Spinner from '../spinner/Spinner';
 import MarvelService from '../../services/MarvelService';
 import mjolnir from '../../resources/img/mjolnir.png';
@@ -41,12 +43,18 @@ class RandomChar extends Component {
 
 
     render() {
-        const {char, loading} = this.state;
+        const {char, loading, error} = this.state,
+            errorFound = error ? <ErrorMsg/> : null,
+            spinnerIs = loading ? <Spinner/> : null,
+            content = !(loading || error) ? <View char={char}/> : null; 
      
-        //Условний рендеринг
+        //Условний ренxдеринг
         return (
             <div className="randomchar">
-                {loading ? <Spinner/> : <View char={char}/>}
+                {/* {loading ? <Spinner/> : <View char={char}/>} */}
+                {errorFound}
+                {spinnerIs}
+                {content}
                 <div className="randomchar__static">
                     <p className="randomchar__title">
                         Random character for today!<br/>
