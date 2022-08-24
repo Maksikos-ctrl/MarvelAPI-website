@@ -10,18 +10,43 @@ import mjolnir from '../../resources/img/mjolnir.png';
 
 class RandomChar extends Component {
     
-    constructor(props) {
-        super(props);
-        this.updateChar();
-    } 
+    // constructor(props) {
+    //     super(props);
+    //     this.updateChar();
+    // } 
 
     state = {
        char: {},
        loading: true,
-       error: false
+       error: false,
+       showRandomChar: true
+       
     }
 
     marvelService = new MarvelService();
+
+
+    onToggleRandomChar = () => {
+        this.setState(state => {
+            this.updateChar();
+            return {
+                showRandomChar: !state.showRandomChar
+            }
+        })
+    }    
+
+
+    //Todo Have added 2 hooks, on mounting(initializing component), and unmounting(removing component) it's needed for browser that he won't blame on us, and we won't have
+    
+    //? This first component change thumbnails throug 4 secs
+    componentDidMount() {
+        this.updateChar();
+        // this.timerId = setInterval(this.updateChar, 4000);
+    } 
+
+    componentWillUnmount() {
+        clearInterval(this.timerId);
+    }
 
     onCharLoaded = char => {
         this.setState({char, loading: false}); // char: char
@@ -43,10 +68,10 @@ class RandomChar extends Component {
 
 
     render() {
-        const {char, loading, error} = this.state,
+        const {char, loading, error, showRandomChar} = this.state,
             errorFound = error ? <ErrorMsg/> : null,
             spinnerIs = loading ? <Spinner/> : null,
-            content = !(loading || error) ? <View char={char}/> : null; 
+            content = !(loading || error) ? <View char={char}/> : null;
      
         //Условний ренxдеринг
         return (
@@ -63,7 +88,7 @@ class RandomChar extends Component {
                     <p className="randomchar__title">
                         Or choose another one
                     </p>
-                    <button className="button button__main">
+                    <button className="button button__main" onClick={this.onToggleRandomChar}>
                         <div className="inner">try it</div>
                     </button>
                     <img src={mjolnir} alt="mjolnir" className="randomchar__decoration"/>
@@ -80,9 +105,12 @@ const View = ({char}) => {
         // thumbnailIsFound = !thumbnail ? 'https://http.dog/static/img/large/404.avif' : thumbnail,
         hasDescr = !descr ? 'Data about this hero is not defined' : descr;
 
+    let imgStyle = {'objectFit' : 'cover'};
+    const checkingOnError = thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? imgStyle = {'objectFit' : 'contain'} : imgStyle = {'objectFit' : 'cover'} 
+
     return (
         <div className="randomchar__block">
-            <img src={thumbnail} alt="Random character" className="randomchar__img"/>
+            <img src={thumbnail} alt="Random character" className="randomchar__img" style={checkingOnError}/>
             <div className="randomchar__info">
                 <p className="randomchar__name">{name}</p>
                 <p className="randomchar__descr">{hasDescr}             

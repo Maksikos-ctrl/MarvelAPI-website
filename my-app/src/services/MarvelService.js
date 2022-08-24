@@ -1,4 +1,5 @@
-
+//TODO Монтирование - создание компонента(componentDidMount()), e.g constructor => render => рефи => componentDidMount()
+//? Размонтирование - удаление нашего компонента(componentWillUnmount()) 
 
 class MarvelService {
     _apiBase = `https://gateway.marvel.com:443/v1/public/`; //! we say here that we can't change prop here
