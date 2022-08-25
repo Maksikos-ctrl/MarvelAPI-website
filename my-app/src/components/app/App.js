@@ -1,37 +1,48 @@
+import { Component } from "react";
+
 import AppHeader from "../appHeader/AppHeader";
 import RandomChar from "../randomChar/RandomChar";
 import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
-import { createContext, useState } from "react";
+
 
 import decoration from '../../resources/img/vision.png';
 
-export const ContextTheme = createContext(null);
+// export const ContextTheme = createContext(null);
+    // const [theme, setTheme] = useState('light'),
+    //     themeToggler = () => {
+    //         setTheme(curr => curr === 'light' ? 'dark' : 'light')
+    //     }
 
 
+class App extends Component {
 
-const App = () => {
+    state = {
+        selectedChar: null
+    }
 
-    const [theme, setTheme] = useState('light'),
-        themeToggler = () => {
-            setTheme(curr => curr === 'light' ? 'dark' : 'light')
-        }
+    onCharSelected = id => {
+        this.setState({ selectedChar: id });
+    }
 
-    return (
-        <ContextTheme.Provider value={{theme, themeToggler}}>
-            <div className="app" id={theme}>
-                <AppHeader/>
-                <main>
-                    <RandomChar/>
-                    <div className="char__content">
-                        <CharList/>
-                        <CharInfo/>
-                    </div>
-                    <img className="bg-decoration" src={decoration} alt="vision"/>
-                </main>
-            </div>
-        </ContextTheme.Provider>
-    )
+    render() {
+        return (
+                <div className="app">
+                    <AppHeader/>
+                    <main>
+                        <RandomChar/>
+                        <div className="char__content">
+                            <CharList onCharSelected={this.onCharSelected}/>
+                            <CharInfo charId={this.state.selectedChar}/>
+                        </div>
+                        <img className="bg-decoration" src={decoration} alt="vision"/>
+                    </main>
+                </div>
+         
+        )
+        
+    }
+ 
 }
 
 export default App;

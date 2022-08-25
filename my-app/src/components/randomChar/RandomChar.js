@@ -52,12 +52,19 @@ class RandomChar extends Component {
         this.setState({char, loading: false}); // char: char
     }
 
+
+    onCharLoading = () => {
+        this.setState({ loading: true });
+    }
+
+
     onErrorHandling = () => {
         this.setState({loading: false, error: true}); 
     }
 
     updateChar = () => {
         const id = Math.floor(Math.random() * (1010699 - 1011334) + 1011334); //? Formula: Math.floor(random number * (max - min) + min), Math.floor() - function returns the largest integer less than or equal to a given number. 
+        this.onCharLoading();
         this.marvelService
             // .getAllCharacters()
             // .then(res => console.log(res));

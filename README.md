@@ -16,7 +16,7 @@ Marvel API - created with:<br>
 API website to display info about ur favorite Marvel Characters
 
 link on video and site <br>
-<a target="_blank" href="/">
+<a target="_blank" href="https://marvel-api-website.vercel.app/">
     <img src="https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white"/>
 </a>
 
