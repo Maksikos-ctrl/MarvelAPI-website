@@ -1,5 +1,6 @@
 import {Component} from 'react';
 
+
 import './charInfo.scss';
 import ErrorMsg from '../errorMessage/ErrorMsg';
 import Spinner from '../spinner/Spinner';
@@ -30,6 +31,12 @@ class CharInfo extends Component {
     }
 
 
+    // componentDidCatch(err, info) {
+    //     console.log(err, info);
+    //     this.setState({ error: true });
+    // }
+
+
     updateChar = () => {
         const {charId} = this.props;
         if (!charId) return;
@@ -39,6 +46,8 @@ class CharInfo extends Component {
             .getCharacter(charId)
             .then(this.onCharLoaded)
             .catch(this.onErrorHandling);
+
+        // this.foo.bar = 0;    
     }
 
     onCharLoaded = char => {

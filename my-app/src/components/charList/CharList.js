@@ -11,27 +11,72 @@ class CharList extends Component {
     state = {
         charList: [],
         loading: true,
-        error: false
+        error: false,
+        newLoadingEl: false,
+        offset: 210
     }
     
     marvelService = new MarvelService();
 
     componentDidMount() {
-        // this.timerId = setInterval(2000);
-        this.marvelService.getAllCharacters()
-            .then(this.onCharListLoaded)
-            .catch(this.onError)
+
+        if (this.state.offset < 219) {
+            this.onRequest();
+        }
+        
+        window.addEventListener('scroll', this.onScroll); 
+
+         
+    }
+
+
+    onScroll = () => {
+        if (this.state.offset < 219) return;
+        if (this.state.newLoadingEl) return;
+        if (this.state.charEnded) {
+            window.removeEventListener('scroll', this.onScroll);
+        }
+
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+            this.onCharListLoading();
+            this.onRequest(this.state.offset);
+        }
     }
 
    
+    onRequest = (offset) => {
+        this.onCharListLoading();
+        this.marvelService
+            .getAllCharacters(offset)
+            .then(this.onCharListLoaded)
+            .catch(this.onError);
+    }
+
+
+    onCharListLoading = () => {
+        this.setState({ newLoadingEl: true});
+    }
 
   
 
-    onCharListLoaded = (charList) => {
-        this.setState({
-            charList,
-            loading: false
-        })
+    onCharListLoaded = (newCharList) => {
+
+        let ended = false;
+
+        newCharList.length < 9 ? ended = true : ended = false;
+            
+    
+
+        this.setState(({offset, charList}) => ({
+            charList: [...charList, ...newCharList],
+            loading: false,
+            newLoadingEl: false,
+            // Our new img will be displaying as prev(there are 9 imgs, cuz i set it in api sets)
+            offset: offset + 9,
+            charEnded: ended,
+        
+             
+        }))
     }
 
     onError = () => {
@@ -68,18 +113,22 @@ class CharList extends Component {
 
     render() {
 
-        const {charList, loading, error} = this.state,
+        const {charList, loading, error, offset, newLoadingEl, charEnded} = this.state,
             items = this.renderItems(charList),
             errorMessage = error ? <ErrorMsg/> : null,
             spinner = loading ? <Spinner/> : null,
-            content = !(loading || error) ? items : null;
+            content = !(loading || error) ? items : null,
+            charIsEnded =  charEnded ? 'none' : 'block';
 
         return (
             <div className="char__list">
                 {errorMessage}
                 {spinner}
                 {content}
-                <button className="button button__main button__long">
+                <button className="button button__main button__long"
+                disabled={newLoadingEl}
+                style={{'display': charIsEnded}}
+                onClick={() => this.onRequest(offset)}>
                     <div className="inner">load more</div>
                 </button>
             </div>
