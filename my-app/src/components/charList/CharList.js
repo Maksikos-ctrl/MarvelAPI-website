@@ -1,10 +1,16 @@
 import { Component } from 'react'; 
 
+import PropTypes from 'prop-types';
 import './charList.scss';
 import ErrorMsg from '../errorMessage/ErrorMsg';
 import Spinner from '../spinner/Spinner';
 import MarvelService from '../../services/MarvelService';
 import './charList.scss';
+
+
+//TODO Вопрос на собесе: Чем композиция лучше чем насследование? Что из них юзаеться чаще? - Всегда юзаеться композиция, потому что есть все встроенный возможности для удобного приминение композиции  
+
+
 
 class CharList extends Component {
 
@@ -20,28 +26,30 @@ class CharList extends Component {
 
     componentDidMount() {
 
-        if (this.state.offset < 219) {
-            this.onRequest();
-        }
+        this.onRequest();
+
+        // if (this.state.offset < 219) {
+        //     this.onRequest();
+        // }
         
-        window.addEventListener('scroll', this.onScroll); 
+        // window.addEventListener('scroll', this.onScroll); 
 
          
     }
 
 
-    onScroll = () => {
-        if (this.state.offset < 219) return;
-        if (this.state.newLoadingEl) return;
-        if (this.state.charEnded) {
-            window.removeEventListener('scroll', this.onScroll);
-        }
+    // onScroll = () => {
+    //     if (this.state.offset < 219) return;
+    //     if (this.state.newLoadingEl) return;
+    //     if (this.state.charEnded) {
+    //         window.removeEventListener('scroll', this.onScroll);
+    //     }
 
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-            this.onCharListLoading();
-            this.onRequest(this.state.offset);
-        }
-    }
+    //     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    //         this.onCharListLoading();
+    //         this.onRequest(this.state.offset);
+    //     }
+    // }
 
    
     onRequest = (offset) => {
@@ -135,5 +143,10 @@ class CharList extends Component {
         )
     }
 }
+
+CharList.propTypes = {
+    onCharSelected: PropTypes.func.isRequired
+}
+
 
 export default CharList;

@@ -2,6 +2,11 @@ import { Component } from 'react';
 
 //? Error boundaries - ловят ошибки: в методе render, в life cycle methods и конструкторах дочерних компонентов
 //! Предохраните НЕ ЛОВЯТ - которые произошли внутри обработчиков событий, потому что события происходят вне метода render + сетевые запросы
+
+
+//! props.children - юзать лучше для sidebars, popup, etc.
+//! Композиция - это когда мы совмещаем компоненти в один и даём им новые props
+
 class ErrorBoundary extends Component {
     state = {
         error: false

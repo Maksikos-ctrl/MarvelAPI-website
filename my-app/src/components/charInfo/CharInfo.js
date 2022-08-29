@@ -1,12 +1,21 @@
 import {Component} from 'react';
 
-
+import PropTypes from 'prop-types'; 
 import './charInfo.scss';
 import ErrorMsg from '../errorMessage/ErrorMsg';
 import Spinner from '../spinner/Spinner';
 import MarvelService from '../../services/MarvelService';
 import Skeleton from '../skeleton/Skeleton';
 
+
+//! Typescript validates types at compile time, whereas PropTypes are checked at runtime. 
+//TODO Typescript is useful when you are writing code: it will warn you if you pass an argument of the wrong type to your React components, give you autocomplete for function calls, etc.
+
+//? PropTypes are useful when you test how the components interact with external data, for example when you load JSON from an API. PropTypes will help you debug (when in React's Development mode) why your component is failing by printing helpful messages like: 
+
+
+
+//TODO Вопрос на собесе: Можно ли при помощи propTypes устанавливать пропси по умолчанию? -Да, это можно сделать, с помощью defaultProps
 
 class CharInfo extends Component {
 
@@ -133,6 +142,11 @@ const Display = ({char}) => {
             </ul>
         </>
     )
+}
+
+
+CharInfo.propTypes = {
+    charId: PropTypes.string
 }
 
 export default CharInfo;
