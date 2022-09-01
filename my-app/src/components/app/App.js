@@ -5,10 +5,14 @@ import RandomChar from "../randomChar/RandomChar";
 import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
-
+import SearchPanel from "../searchPanel/SearchPanel";
+import MarvelService from '../../services/MarvelService';
 
 
 import decoration from '../../resources/img/vision.png';
+
+
+//? ref - это ссылка на элемент или компонент в DOM-дереве
 
 // export const ContextTheme = createContext(null);
     // const [theme, setTheme] = useState('light'),
@@ -18,16 +22,48 @@ import decoration from '../../resources/img/vision.png';
 
 
 class App extends Component {
-
-    state = {
-        selectedChar: null
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedChar: null,
+            charList: [],
+            term: ''
+        }
     }
+
+    marvelService = new MarvelService();
+
+   
 
     onCharSelected = id => {
         this.setState({ selectedChar: id });
     }
 
+    onUpdateSearch = (term, charList) => {
+        this.filterImgs(charList)
+        // this.setState({term});
+    }
+
+    
+
+    // searching = (items, term) => {
+    //     if (term.length === 0) {
+    //         return items;
+    //     }
+
+    //     return items.filter(item => {
+    //         return item.name.indexOf(-1);  //? Возвращаем только те элементы которые имме.т имя у каждого элемента массива, потом прохоимся по строке методом indexOf
+    //     });
+    // }
+
+    filterImgs = (e) => {
+        let newTerm = this.state.term.filter(c => c.name.indexOf(e.target.value) !== -1);
+        this.setState({term: newTerm});
+    }
+
+
     render() {
+        const {selectedChar} = this.state;
         return (
                 <div className="app">
                     <AppHeader/>
@@ -35,13 +71,16 @@ class App extends Component {
                         <ErrorBoundary>
                            <RandomChar/>
                         </ErrorBoundary>
+                        <div className="search-panel">
+                            <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
+                        </div>
                         <div className="char__content">
                             <ErrorBoundary>
-                                <CharList onCharSelected={this.onCharSelected}/>
+                                <CharList onCharSelected={this.onCharSelected} />
                             </ErrorBoundary>
                             
                             <ErrorBoundary>
-                                <CharInfo charId={this.state.selectedChar}/>
+                                <CharInfo charId={selectedChar}/>
                             </ErrorBoundary>
                          
                         </div>

@@ -8,6 +8,15 @@ import MarvelService from '../../services/MarvelService';
 import './charList.scss';
 
 
+//TODO Типичные примеры использования порталов:
+
+  /*  Модальные диалоговые окна.
+    Всплывающие подсказки.
+    Всплывающие визитки.
+    Загрузчики.
+  */
+
+    
 //TODO Вопрос на собесе: Чем композиция лучше чем насследование? Что из них юзаеться чаще? - Всегда юзаеться композиция, потому что есть все встроенный возможности для удобного приминение композиции  
 
 
@@ -94,23 +103,64 @@ class CharList extends Component {
         })
     }
 
+
+    itemRefs = [];
+
+    setRef = (ref) => {
+        this.itemRefs.push(ref);
+    }
+
+    
+    focusOnItem = (id) => {
+
+        //! По возможности, не злоупотребляйте рефами, только в крайних случаях
+        this.itemRefs.forEach(item => item.classList.remove('char__item_selected'));
+        this.itemRefs[id].classList.add('char__item_selected');
+        this.itemRefs[id].focus();
+    }
+
     // Этот метод создан для оптимизации, 
     // чтобы не помещать такую конструкцию в метод render
     renderItems(arr) {
-        const items = arr.map(item => {
+        const items = arr.map((item, n) => {
             let imgStyle = {'objectFit' : 'cover'};
             if (item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
                 imgStyle = {'objectFit' : 'unset'};
             }
+
+            // return items.filter((item) => {
+            //     return searchParam.some((newItem) => {
+            //         return (
+            //             item[newItem]
+            //                 .toString()
+            //                 .toLowerCase()
+            //                 .indexOf(q.toLowerCase()) > -1
+            //         );
+            //     });
+            // });
+           
             
             return (
-                <li 
-                    className="char__item" key={item.id} onClick={() => this.props.onCharSelected(item.id)}>
+                    <li 
+                    className="char__item"
+                    tabIndex={0}
+                    ref={this.setRef}
+                    key={item.id}
+                    onClick={() => {
+                        this.props.onCharSelected(item.id);
+                        this.focusOnItem(n);
+                    }}
+                    onKeyPress={e => {
+                        if (e.key === ' ' || e.key === "Enter") {
+                            this.props.onCharSelected(item.id);
+                            this.focusOnItem(n);
+                        }
+                    }}>
                         <img src={item.thumbnail} alt={item.name} style={imgStyle}/>
                         <div className="char__name">{item.name}</div>
                 </li>
             )
-        });
+    });
         // А эта конструкция вынесена для центровки спиннера/ошибки
         return (
             <ul className="char__grid">
@@ -130,6 +180,7 @@ class CharList extends Component {
 
         return (
             <div className="char__list">
+                
                 {errorMessage}
                 {spinner}
                 {content}

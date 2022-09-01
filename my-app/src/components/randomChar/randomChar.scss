@@ -29,10 +29,13 @@
         text-transform: uppercase;
     }
     &__descr {
-        font-size: 14px;
+        font-size: 13px;
+        font-weight: bold;
         line-height: 18px;
+        box-sizing: content-box;
     }
     &__btns {
+        margin-bottom: 28px; 
         a:nth-child(1) {
             margin-right: 30px;
         }

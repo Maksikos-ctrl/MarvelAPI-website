@@ -13,8 +13,11 @@
         grid-template-columns: repeat(3, 200px);
         column-gap: 25px;
         row-gap: 30px;
+        
     }
     &__item {
+        display: inline-block;
+        overflow: hidden;
         width: 200px;
         height: 318px;
         background-color: $dark;
@@ -23,14 +26,24 @@
         cursor: pointer;
         transition: 0.3s transform;
         img {
+            transition: 2s; 
+            display: block; 
             width: 200px;
             height: 200px;
             object-fit: cover;
             transform: translate(-15px, -15px);
+            &:hover {
+                transform: scale(1.2); 
+                padding-bottom: 20px;
+            }
         }
         &_selected {
-            box-shadow: 0 5px 20px $main-color;
+            box-shadow: 0 5px 90px $main-color;
             transform: translateY(-8px);
+        }
+        &:hover {
+            background-color: $main-color;
+            transition: background-color 0.25s;
         }
     }
     &__name {
@@ -39,5 +52,6 @@
         line-height: 29px;
         text-transform: uppercase;
         color: #fff;
+       
     }
 }
