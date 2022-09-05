@@ -28,9 +28,37 @@
                 }
             }
         }
+       
     }
    
 }
+
+
+@media (max-width: 1102px) {
+    .app {
+        &__menu {
+            margin-right: 6rem;
+        }
+        &__title {
+            margin-left: 2rem;
+        }
+    }
+    
+}
+
+@media (max-width: 994px) {
+    .app {
+        &__menu {
+            padding-right: 16rem;
+        }
+        &__title {
+            margin-left: 2rem;
+        }
+    }
+    
+}
+
+
 
 
 #dark {

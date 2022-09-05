@@ -28,7 +28,8 @@ class CharList extends Component {
         loading: true,
         error: false,
         newLoadingEl: false,
-        offset: 210
+        offset: 210,
+        charEnded: false
     }
     
     marvelService = new MarvelService();
@@ -37,28 +38,28 @@ class CharList extends Component {
 
         this.onRequest();
 
-        // if (this.state.offset < 219) {
-        //     this.onRequest();
-        // }
+        if (this.state.offset < 219) {
+            this.onRequest();
+        }
         
-        // window.addEventListener('scroll', this.onScroll); 
+        window.addEventListener('scroll', this.onScroll); 
 
          
     }
 
 
-    // onScroll = () => {
-    //     if (this.state.offset < 219) return;
-    //     if (this.state.newLoadingEl) return;
-    //     if (this.state.charEnded) {
-    //         window.removeEventListener('scroll', this.onScroll);
-    //     }
+    onScroll = () => {
+        if (this.state.offset < 219) return;
+        if (this.state.newLoadingEl) return;
+        if (this.state.charEnded) {
+            window.removeEventListener('scroll', this.onScroll);
+        }
 
-    //     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-    //         this.onCharListLoading();
-    //         this.onRequest(this.state.offset);
-    //     }
-    // }
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+            this.onCharListLoading();
+            this.onRequest(this.state.offset);
+        }
+    }
 
    
     onRequest = (offset) => {
@@ -184,12 +185,12 @@ class CharList extends Component {
                 {errorMessage}
                 {spinner}
                 {content}
-                <button className="button button__main button__long"
+                <div
                 disabled={newLoadingEl}
                 style={{'display': charIsEnded}}
                 onClick={() => this.onRequest(offset)}>
-                    <div className="inner">load more</div>
-                </button>
+                   
+                </div>
             </div>
         )
     }

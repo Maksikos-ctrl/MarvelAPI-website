@@ -41,7 +41,7 @@ class App extends Component {
 
     onUpdateSearch = (term, charList) => {
         this.filterImgs(charList)
-        // this.setState({term});
+        this.setState({term});
     }
 
     
@@ -56,9 +56,16 @@ class App extends Component {
     //     });
     // }
 
-    filterImgs = (e) => {
-        let newTerm = this.state.term.filter(c => c.name.indexOf(e.target.value) !== -1);
-        this.setState({term: newTerm});
+    filterImgs = (term) => {
+        // let newTerm = this.state.term.filter(c => c.name.indexOf(e.target.value) !== -1);
+        if (term.length === 0) {
+            return this.state.charList;
+        }  
+
+        return this.state.term.filter(item => {
+            return item.name.indexOf(term) > -1; //? Возвращаем только те элементы которые имме.т имя у каждого элемента массива, потом прохоимся по строке методом indexOf
+        });
+        
     }
 
 
@@ -71,9 +78,7 @@ class App extends Component {
                         <ErrorBoundary>
                            <RandomChar/>
                         </ErrorBoundary>
-                        <div className="search-panel">
-                            <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
-                        </div>
+                       
                         <div className="char__content">
                             <ErrorBoundary>
                                 <CharList onCharSelected={this.onCharSelected} />

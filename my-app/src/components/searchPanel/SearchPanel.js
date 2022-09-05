@@ -14,7 +14,7 @@ class SearchPanel extends Component{
     onUpdateSearch = (e) => { 
         const term = e.target.value;
         this.setState({term}); 
-        this.props.onUpdateSearch(term); 
+        this.props.onUpdateSearch(term); //эта часть нам приходит из другого компонента
     }
    
 
