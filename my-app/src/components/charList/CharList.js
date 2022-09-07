@@ -81,7 +81,11 @@ class CharList extends Component {
 
         let ended = false;
 
-        newCharList.length < 9 ? ended = true : ended = false;
+        if (newCharList.length < 5) {
+            ended = true
+        }
+
+     
             
     
 

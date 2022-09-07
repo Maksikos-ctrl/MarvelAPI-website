@@ -119,7 +119,7 @@ const Display = ({char}) => {
                 </div>
             </div>
             <div className="char__descr">
-               {hasDescr}
+               <h2 className="char__descr des">{hasDescr}</h2>
             </div>
             <div className="char__comics">Comics:</div>
             <ul className="char__comics-list">

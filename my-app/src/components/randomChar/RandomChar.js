@@ -124,10 +124,10 @@ const View = ({char}) => {
                 <p className="randomchar__descr">{hasDescr}             
                 </p>
                 <div className="randomchar__btns">
-                    <a href={homePage} className="button button__main">
+                    <a href={homePage} className="randomchar__btns__1 button button__main">
                         <div className="inner">Homepage</div>
                     </a>
-                    <a href={wiki} className="button button__secondary">
+                    <a href={wiki} className="randomchar__btns__1__2 button button__secondary">
                         <div className="inner">Wiki</div>
                     </a>
                 </div>

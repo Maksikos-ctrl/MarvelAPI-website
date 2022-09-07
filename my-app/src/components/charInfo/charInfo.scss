@@ -67,3 +67,61 @@
     }
 
 }
+
+
+
+@media (max-width: 1102px) {
+    .char {
+        &__info {
+            right: 42rem;
+            width: 700px
+            // top: -40px;
+            // width: 60rem;
+            // height: 300px;
+        }  
+
+        &__btns {
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 20px;
+
+            
+
+        }
+
+        &__descr  {
+            z-index: 10;
+            width: 100%;
+          
+            h2.des{
+                margin-top: 100px;
+                margin-left: 172px;
+                font-size: 18px;
+                font-weight: 700;
+            }
+        }
+
+        &__comics {
+            margin-left: 36rem;
+            margin-top: -180px;
+           
+            
+            &-list {
+                margin-top: 20px;
+                margin-left: 30rem;
+                // height: 200%;
+            }
+
+            &-item {
+                // width: 200%;
+                
+            }
+
+        }
+    }
+  
+
+   
+
+    
+}

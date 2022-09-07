@@ -55,3 +55,20 @@
        
     }
 }
+
+
+@media (max-width: 1102px) {
+    .char {
+        &__grid {
+            margin: 20rem auto;
+            
+            
+        }
+        &__item {
+            width: 180px;
+            margin-left: 60px;
+            z-index: 100000;
+        }
+    }  
+    
+}

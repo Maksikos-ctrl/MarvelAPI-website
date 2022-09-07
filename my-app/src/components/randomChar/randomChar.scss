@@ -64,20 +64,25 @@
         right: -37px;
     }
   
-    .random {
-        display: flex;
     
-        @media (max-width: 1282px) {
-            margin: 0 5px;
-        }
-    
-        @media (max-width: 992px) {
-            flex-direction: column;
-        }
-    }
   
 
    
+}
+
+
+@media (max-width: 1102px) {
+    .randomchar {
+        width: 70%;
+        height: 70%;
+
+        
+        
+       
+    }
+
+    
+    
 }
 
 
