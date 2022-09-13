@@ -71,7 +71,7 @@
 }
 
 
-@media (max-width: 1102px) {
+@media (max-width: 992px) {
     .randomchar {
         width: 70%;
         height: 70%;
@@ -82,6 +82,62 @@
     }
 
     
+    
+}
+
+
+@media (max-width: 768px) {
+    .randomchar {
+       
+        &__block {
+            margin-top: -360px;
+        }
+        &__static {
+            // display: block;
+            padding-top: 80px;
+            width: 100%;
+            right: 96%;
+            margin-top: 20rem;
+            
+        }
+
+        &__btns {
+            display: flex;
+            justify-content: flex-start;
+            
+            margin-left: -220px;
+            margin-top: 40px;
+        }
+    }
+}
+
+
+@media (max-width: 480px) {
+    .randomchar {
+
+        &__name {
+            font-size: 17px;
+        }
+        &__descr {
+            font-size: 12px;
+        }
+
+        &__btns {
+            margin-right: 0px;
+        }
+
+        &__title {
+            font-size: 18px;
+        }
+       
+        &__block {
+            margin-left: -20px;
+        }
+
+        &__static {
+            margin-left: -20px;
+        }
+    }
     
 }
 

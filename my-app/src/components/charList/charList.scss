@@ -57,7 +57,7 @@
 }
 
 
-@media (max-width: 1102px) {
+@media (max-width: 992px) {
     .char {
         &__grid {
             margin: 20rem auto;
@@ -70,5 +70,11 @@
             z-index: 100000;
         }
     }  
+    
+}
+
+@media (max-width: 768px) {
+    
+
     
 }

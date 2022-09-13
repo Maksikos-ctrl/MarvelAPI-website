@@ -94,18 +94,23 @@ class CharInfo extends Component {
 }
 
 const Display = ({char}) => {
-    const {name, thumbnail, descr, homePage, wiki, comics} = char,
+    const {name, thumbnail, descr, homePage, wiki, comics, id} = char,
         thumbnailIsFound = !thumbnail ? 'https://http.dog/static/img/large/404.avif' : thumbnail,
         hasDescr = !descr ? 'Data about this hero is not defined' : descr,
         comicsIs = !comics.length > 0 ? 'This character has not been filmed yet in any movie' : null;
+       
 
-    let imgStyle = {'objectFit' : 'cover'};
-    const checkingOnError = thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? imgStyle = {'objectFit' : 'contain'} : imgStyle = {'objectFit' : 'cover'}      
+    let imgStyle = {'objectFit' : 'cover'},
+        randomId = Math.random(Math.floor(id * 10) / 10 );
+    const checkingOnError = thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? imgStyle = {'objectFit' : 'contain', 'paddingTop': 30} : imgStyle = {'objectFit' : 'cover'}
+    // if (thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
+    //     imgStyle = {'objectFit' : 'contain'};
+    // }      
 
     return (
         <>
             <div className="char__basics">
-                <img src={thumbnail} alt={name} style={checkingOnError}/>
+                <img className="char__img" src={thumbnail} alt={name} style={checkingOnError}/>
                 <div>
                     <div className="char__info-name">{name}</div>
                     <div className="char__btns">
@@ -118,19 +123,22 @@ const Display = ({char}) => {
                     </div>
                 </div>
             </div>
-            <div className="char__descr">
-               <h2 className="char__descr des">{hasDescr}</h2>
-            </div>
-            <div className="char__comics">Comics:</div>
+            <p className="char__descr">
+               <h2 className="char__descr description">{hasDescr}</h2>
+            </p>
+            <p className="char__comics">Comics:</p>
             <ul className="char__comics-list">
                 {comicsIs}
+
+
+               
                 
                 {
                     comics.map((i, n) => {
                         // eslint-disable-next-line
-                        if (i > 9) return;
+                       
                         return (
-                            <li key={n} className="char__comics-item">
+                            <li key={n} className={"char__comics-item " + randomId}>
                                 
                                 {i.name}
                             </li>

@@ -34,7 +34,7 @@
 }
 
 
-@media (max-width: 1102px) {
+@media (max-width: 992px) {
     .app {
         &__menu {
             margin-right: 6rem;
@@ -56,6 +56,32 @@
         }
     }
     
+}
+
+@media (max-width: 768px) {
+    .app {
+        &__title {
+            font-size: 17px;
+        }
+        &__menu ul {
+           font-size: 20px;
+           padding-right: 350px;
+        }
+    }
+}
+
+
+@media (max-width: 480px) {
+    .app {
+        &__title {
+            font-size: 13px;
+            margin-left: 10px;
+        }
+        &__menu ul {
+            font-size: 14px;
+            padding-right: 450px;
+        }
+    }    
 }
 
 
